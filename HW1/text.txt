@@ -1,0 +1,4 @@
+python3 學號_hw1.py [min support] [輸入檔名] [輸出檔名]
+python3 110070002_HW1.py 4 sample.txt sample_out.txt
+python3 test.py 4 sample.txt sample_out.txt
+python3 apriori.py 0.2 sample.txt sample_out.txt
