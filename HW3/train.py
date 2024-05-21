@@ -5,7 +5,7 @@ from data_loader import load_data
 import torch
 import torch.nn as nn
 
-from model import GCN
+from model import Net
 # from model import YourGNNModel # Build your model in model.py
     
 import os
@@ -69,13 +69,14 @@ if __name__ == '__main__':
     # you can add your arguments if needed
     parser.add_argument('--epochs', type=int, default=300)
     parser.add_argument('--es_iters', type=int, help='num of iters to trigger early stopping')
+    parser.add_argument('--dropout', type=float, default=0.5)
     parser.add_argument('--use_gpu', action='store_true')
     args = parser.parse_args()
 
-    if args.use_gpu:
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    else:
-        device = torch.device("cpu")
+    # if args.use_gpu:
+    #     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # else:
+    device = torch.device("cpu")
 
     # Load data
     features, graph, num_classes, \
@@ -86,7 +87,8 @@ if __name__ == '__main__':
     """TODO: build your own model in model.py and replace GCN() with your model"""
     in_size = features.shape[1]
     out_size = num_classes
-    model = GCN(in_size, 16, out_size).to(device)
+    # num_features, hidden, dropout, num_classes
+    model = Net(in_size, 16, 0.5, out_size).to(device)
     
     # model training
     print("Training...")
